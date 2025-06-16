@@ -30,15 +30,15 @@ function draw() {
   // Desenho das verduras
   fill(0, 150, 0);
   verduras.forEach(verdura => {
-    if (verdura.coletada) ellipse(verdura.x, verdura.y, 20);
+    if (!verdura.coletada) ellipse(verdura.x, verdura.y, 20);
   });
 
   // Desenho do jogador (ou dentro do carro)
   fill(0);
   if (jogador.noCarro) {
-    ellipse(carro.x + 30, carro.y + 20, jogador.tamanho);
+    ellipse(carro.x + 30, carro.y + 20, jogador.tamanho); // Dentro do carro
   } else {
-    ellipse(jogador.x, jogador.y, jogador.tamanho);
+    ellipse(jogador.x, jogador.y, jogador.tamanho); // Fora do carro
   }
 
   // Lógica de movimento
@@ -87,6 +87,8 @@ function entrarNoCarro() {
   let distanciaCarro = dist(jogador.x, jogador.y, carro.x + 30, carro.y + 20);
   if (verdurasColetadas === verduras.length && distanciaCarro < 40) {
     jogador.noCarro = true;
+    jogador.x = carro.x + 30; // Ajusta a posição do jogador dentro do carro
+    jogador.y = carro.y + 20;
   }
 }
 
@@ -108,4 +110,5 @@ function verificarVitoria() {
     venceu = true;
   }
 }
+
 
